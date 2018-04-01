@@ -30,6 +30,24 @@ class AnimalContainer extends React.Component {
         this.setRandomPic()
       }
     }
+    picControls(){
+      if (this.state.currentPic.votable){
+        return(
+            <div className = 'AnimalContainer__icons'>
+              <div onClick = {()=>this.voteOnPic(0)}><i className="fas fa-times-circle"></i></div>
+              <div onClick = {this.setRandomPic}><i className="fas fa-step-forward"></i></div>
+              <div onClick = {()=>this.voteOnPic(1)}><i className="fas fa-check-circle"></i></div>
+            </div>
+        )
+      }
+      else {
+        return(
+          <div className = 'AnimalContainer__icons'>
+            <div onClick = {this.setRandomPic}><i className="fas fa-step-forward"></i></div>
+          </div>
+        )
+      }
+    }
     render() {
       if(this.state.currentPic && !this.state.isLoading){
         return (
@@ -40,13 +58,7 @@ class AnimalContainer extends React.Component {
             alt = ""
             onError={this.setRandomPic}/>
             <p className = "AnimalContainer__petName">{this.state.currentPic.petName}</p>
-
-            <div className = 'AnimalContainer__icons'>
-              <div onClick = {()=>this.voteOnPic(0)}><i className="fas fa-times-circle"></i></div>
-              <div onClick = {this.setRandomPic}><i className="fas fa-step-forward"></i></div>
-              <div onClick = {()=>this.voteOnPic(1)}><i className="fas fa-check-circle"></i></div>
-            </div>
-
+            {this.picControls()}
           </div>
         )
       }
